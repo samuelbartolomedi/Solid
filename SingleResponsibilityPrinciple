@@ -12,6 +12,20 @@ public class OrderProcessor {
         this.total = 0.0;
     }
 
+    /*como chamar as classes criadas?
+    ItemValidor itemValidator = new itemValidator();
+    PaymentProcessor paymentProcessor = new PaymentProcessor();
+    ReceiptSender receiptSender = new ReceiptSender();
+    public void processOrder() {
+        if (paymentProcessor.validateItems()){
+            calculateTotal();
+            if (paymentProcessor.processPayment()){
+            receiptSender.sendReceipt();
+            }
+        }
+    }
+    */
+
     public void processOrder() {
         if (orderRepository.validateItems()) {
             orderRepository.calculateTotal();
@@ -20,9 +34,20 @@ public class OrderProcessor {
             }
         }
     }
+
+    public void calculateTotal() {
+        for (String item : items) {
+            total += getItemPrice(item);
+        }
+    }
+
+    private double getItemPrice(String item) {
+        // Lógica para obter o preço do item
+        return 10.0; 
+    }
 }
 
-public class OrderRepository{
+public class ItemValidator(){
     private bool validateItems() {
         // Lógica que valida se os itens do pedido são válidos (por exemplo, se estão disponíveis no estoque)
         for (String item : items) {
@@ -33,31 +58,24 @@ public class OrderRepository{
         return true;
     }
 
-    private void calculateTotal() {
-        for (String item : items) {
-            total += getItemPrice(item);
-        }
+    private boolean isItemAvailable(String item) {
+        // Lógica para verificar se o item está disponível no estoque
+        return true;
     }
+}
 
-    private double getItemPrice(String item) {
-        // Lógica para obter o preço do item
-        return 10.0; 
-    }
-
+public class PaymentProcessor{
     private boolean processPayment() {
         // Lógica para processar pagamento com o método especificado
         // Pode incluir interação com APIs de pagamento, etc.
         System.out.println("Processing payment with " + paymentMethod);
         return true;
     }
+}
 
+Public class ReceiptSender{
     private void sendReceipt() {
         // Lógica para enviar um recibo por e-mail ao cliente
         System.out.println("Sending receipt to " + customerEmail);
-    }
-
-    private boolean isItemAvailable(String item) {
-        // Lógica para verificar se o item está disponível no estoque
-        return true;
     }
 }
