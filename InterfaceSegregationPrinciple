@@ -1,0 +1,67 @@
+public interface ProductAddService {
+    void addProduct(Product product);
+}
+
+public interface ProductRemoveService {
+    void removeProduct(int productId);
+}
+
+public interface ProductUpdateService {
+    void updateProduct(Product product);
+}
+
+public interface ProductReadService {
+    Product getProduct(int productId);
+    List<Product> getAllProducts();
+}
+
+public class AdminProductService implements ProductAddService, ProductRemoveService, ProductUpdateService, ProductReadService {
+    private ProductRepository repository;
+
+    public AdminProductService(ProductRepository repository) {
+        this.repository = repository;
+    }
+
+    @Override
+    public void addProduct(Product product) {
+        repository.save(product);
+    }
+
+    @Override
+    public void removeProduct(int productId) {
+        repository.delete(productId);
+    }
+
+    @Override
+    public void updateProduct(Product product) {
+        repository.update(product);
+    }
+
+    @Override
+    public Product getProduct(int productId) {
+        return repository.findById(productId);
+    }
+
+    @Override
+    public List<Product> getAllProducts() {
+        return repository.findAll();
+    }
+}
+
+public class CustomerProductService implements ProductReadService {
+    private ProductRepository repository;
+
+    public CustomerProductService(ProductRepository repository) {
+        this.repository = repository;
+    }
+
+    @Override
+    public Product getProduct(int productId) {
+        return repository.findById(productId);
+    }
+
+    @Override
+    public List<Product> getAllProducts() {
+        return repository.findAll();
+    }
+}
