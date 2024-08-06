@@ -1,0 +1,36 @@
+public interface Database {
+    void connect();
+    void disconnect();
+    void saveUser(String user);
+}
+
+public class MySQLDatabase implements Database {
+    @Override
+    public void connect() {
+        System.out.println("Connected to MySQL");
+    }
+
+    @Override
+    public void disconnect() {
+        System.out.println("Disconnected from MySQL");
+    }
+
+    @Override
+    public void saveUser(String user) {
+        System.out.println("User saved in MySQL");
+    }
+}
+
+public class UserRepository {
+    private Database database;
+    
+    public UserRepository(Database database) {
+        this.database = database;
+    }
+
+    public void addUser(String user) {
+        database.connect();
+        database.saveUser(user);
+        database.disconnect();
+    }
+}
