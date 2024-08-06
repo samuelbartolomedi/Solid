@@ -1,0 +1,26 @@
+public class Shape{
+
+    public decimal calucalteArea() {
+        return area;
+    }
+}
+
+public class Rectangle extends Shape{
+    private int width;
+    private int height;
+
+    @Override
+    public decimal calucalteArea(){
+        return width * height;
+    }
+    
+}
+
+public Square extends Shape{
+    private int sideLength;
+
+    @Override
+    public decimal calucalteArea(){
+        return sideLength * sideLength;
+    }
+}
