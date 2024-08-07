@@ -14,7 +14,7 @@ public class PaymentService {
 }
 
 public interface PaymentStrategy{
-    void processPayment(decimal amount)
+    void processPayment(double amount)
 }
 
 public class CreditCardPayment implements PaymentStrategy {
