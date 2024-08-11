@@ -1,0 +1,14 @@
+public class PaymentService {
+    private PaymentStrategy paymentStrategy;
+    
+    public void setPaymentStrategy(PaymentStrategy paymentStrategy) {
+        this.paymentStrategy = paymentStrategy;
+    }
+
+    public void processPayment(double amount) {
+        if (paymentStrategy == null) {
+            throw new UnsupportedOperationException("Payment method not set");
+        }
+        paymentStrategy.processPayment(amount);
+    }
+}

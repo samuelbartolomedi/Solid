@@ -4,38 +4,34 @@ public class OrderProcessor {
     private String paymentMethod;
     private String customerEmail;
     private OrderRepository orderRepository;
+    private ItemValidor itemValidator;
+    private TotalCalculator totalCalculator
+    privatte PaymentProcessor paymentProcessor;
 
-    public OrderProcessor(List<String> items, String paymentMethod, String customerEmail) {
+    /*terminal construtor e chamada dos métodos!*/
+    public OrderProcessor(List<String> items, String paymentMethod, String customerEmail, ItemValidor itemValidator, TotalCalculator totalCalculator, ) {
         this.items = items;
         this.paymentMethod = paymentMethod;
         this.customerEmail = customerEmail;
         this.total = 0.0;
+        this.itemValidator = itemValidator;
+        this.totalCalculator = totalCalculator
     }
 
-    /*como chamar as classes criadas?
-    ItemValidor itemValidator = new itemValidator();
     PaymentProcessor paymentProcessor = new PaymentProcessor();
     ReceiptSender receiptSender = new ReceiptSender();
     public void processOrder() {
-        if (paymentProcessor.validateItems()){
-            calculateTotal();
+        if (itemValidator.validateItems(items)){
+            totalCalculator.calculateTotal(items);
             if (paymentProcessor.processPayment()){
-            receiptSender.sendReceipt();
+                receiptSender.sendReceipt();
             }
         }
     }
-    */
+}
 
-    public void processOrder() {
-        if (orderRepository.validateItems()) {
-            orderRepository.calculateTotal();
-            if (orderRepository.processPayment()) {
-                orderRepository.sendReceipt();
-            }
-        }
-    }
-
-    public void calculateTotal() {
+public class TotalCalculator {
+    public void calculateTotal(items) {
         for (String item : items) {
             total += getItemPrice(item);
         }
@@ -48,7 +44,7 @@ public class OrderProcessor {
 }
 
 public class ItemValidator(){
-    private bool validateItems() {
+    private bool validateItems(List<String> items) {
         // Lógica que valida se os itens do pedido são válidos (por exemplo, se estão disponíveis no estoque)
         for (String item : items) {
             if (!isItemAvailable(item)) {

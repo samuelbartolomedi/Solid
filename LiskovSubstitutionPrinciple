@@ -1,5 +1,4 @@
 public class Shape{
-
     public decimal calucalteArea() {
         return area;
     }
@@ -10,17 +9,16 @@ public class Rectangle extends Shape{
     private int height;
 
     @Override
-    public decimal calucalteArea(){
+    public decimal calculalteArea(){
         return width * height;
     }
-    
 }
 
 public Square extends Shape{
     private int sideLength;
 
     @Override
-    public decimal calucalteArea(){
+    public decimal calculalteArea(){
         return sideLength * sideLength;
     }
 }
