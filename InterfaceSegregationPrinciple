@@ -15,6 +15,8 @@ public interface ProductReadService {
     List<Product> getAllProducts();
 }
 
+// transformar as interfaces em write para add, remove e update e read para listar
+
 public class AdminProductService implements ProductAddService, ProductRemoveService, ProductUpdateService, ProductReadService {
     private ProductRepository repository;
 
